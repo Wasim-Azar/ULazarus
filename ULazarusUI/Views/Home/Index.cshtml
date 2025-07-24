@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Welcome to University Lazarus";
+    ViewData["ShowBodyContent"] = false;  // Disables body content for homepage
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Use shared layout for header/footer
+}
+
+@section CustomHero {
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero {
+            background: url('/images/Homepage.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            color: white;
+            text-shadow: 2px 2px 5px black;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+             text-shadow:
+        0 0 7px rgba(0, 0, 0, 1),
+        0 0 12px rgba(0, 0, 0, 1),
+        0 0 15px rgba(0, 0, 0, 1),
+        0 0 22px rgba(0, 0, 0, 1);
+            text-align: center;
+            z-index: 2; /* <--- ensures text is above the overlay */
+        }
+
+
+
+
+
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+    </style>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Lazarus University</h1>
+            <h2>Start your story here</h2>
+        </div>
+    </div>
+}
+
+
+<!-- Main Content (page content will go here, currently hidden for homepage) -->
+<main role="main" class="container">
+    <h3>Welcome to our ULazarus website!</h3>
+    <!-- You can add additional content for the homepage here -->
+</main>

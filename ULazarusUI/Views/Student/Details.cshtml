@@ -1,0 +1,54 @@
+﻿@model ULazarusData.Models.Student
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<h2>Student Details</h2>
+
+<div>
+    <h4>@Model.FirstName @Model.LastName</h4>
+    <dl class="row">
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
+
+        <dt class="col-sm-2">Faculty</dt>
+        <dd class="col-sm-10">@Model.Faculty?.Name ?? "N/A"</dd>
+
+        <dt class="col-sm-2">Schedule Location</dt>
+        <dd class="col-sm-10">@Model.Schedule?.Location ?? "N/A"</dd>
+    </dl>
+
+    <h4>Course Results</h4>
+    @if (Model.CourseResults.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cr in Model.CourseResults)
+                {
+                    <tr>
+                        <td>@cr.Course.Name</td>
+                        <td>@cr.Score</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No course results found.</p>
+    }
+</div>
+
+<p>
+    <a asp-action="Index">Back to List</a>
+    @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+    {
+     < a asp - action = "Edit" asp - route - id = "@Model.StudentId" > Edit </ a >
+    }
+</p>

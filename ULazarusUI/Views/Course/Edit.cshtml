@@ -1,0 +1,53 @@
+﻿@model ULazarusData.Models.Course
+
+@{
+    ViewData["Title"] = "Edit Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit Course</h1>
+
+<!-- Form to edit an existing Course -->
+<form asp-action="Edit">
+
+    <!-- Hidden input to hold the Course ID -->
+    <input type="hidden" asp-for="CourseId" />
+
+    <!-- Input field for Course Name -->
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown to select Faculty -->
+    <div class="form-group">
+        <label asp-for="Faculty"></label>
+        <select asp-for="Faculty" class="form-control" asp-items="ViewBag.Faculties"></select>
+        <span asp-validation-for="Faculty" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown to select Sector -->
+    <div class="form-group">
+        <label asp-for="Sector"></label>
+        <select asp-for="Sector" class="form-control" asp-items="ViewBag.Sectors"></select>
+        <span asp-validation-for="Sector" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown to select Teacher -->
+    <div class="form-group">
+        <label asp-for="Teacher"></label>
+        <select asp-for="Teacher" class="form-control" asp-items="ViewBag.Teachers"></select>
+        <span asp-validation-for="Teacher" class="text-danger"></span>
+    </div>
+
+    <!-- Submit and Cancel buttons -->
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+<!-- Include client-side validation scripts -->
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

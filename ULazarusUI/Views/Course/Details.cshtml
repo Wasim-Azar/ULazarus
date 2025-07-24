@@ -1,0 +1,78 @@
+﻿ @model ULazarusData.Models.Course
+
+@{
+    ViewData["Title"] = "Course Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background: url('/images/OpenBook.jpeg') no-repeat center center fixed;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .card-custom {
+        background-color: rgba(200, 200, 200, 0.85); /* light background with transparency */
+        color: #333;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        padding: 1.5rem;
+    }
+
+        .card-custom h5 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+    h1 {
+        background-color: rgba(0, 0, 0, 0.6, 0.85);
+        padding: 10px 20px;
+        border-radius: 12px;
+        display: inline-block;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        margin-right: 10px;
+    }
+</style>
+
+<h1>@Model.Name</h1>
+
+<div class="card card-custom">
+    <div class="card-body">
+        <h5 class="card-title">Faculty: @Model.Faculty?.Name</h5>
+        <h5 class="card-title">Sector: @Model.Sector?.Name</h5>
+        <h5 class="card-title">Teacher: @Model.Teacher?.FirstName @Model.Teacher?.LastName</h5>
+
+        @if (Model.Schedules != null && Model.Schedules.Any())
+        {
+            <h5>Schedules: </h5>
+            <ul>
+                @foreach (var schedule in Model.Schedules)
+                {
+                    <li>@schedule.Name — @schedule.Date.ToShortDateString() at @schedule.Location</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No schedules assigned yet.</p>
+        }
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-primary mt-3">Back to Course List</a>
+
+@if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+{
+    <a asp-action="Edit" asp-route-id="@Model.CourseId" class="btn btn-warning mt-3">Edit Course</a>
+}
+
+@if (User.IsInRole("Admin"))
+{
+    <a asp-action="Delete" asp-route-id="@Model.CourseId" class="btn btn-danger mt-3">Delete Course</a>
+}

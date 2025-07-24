@@ -1,0 +1,103 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ULazarusData.Models;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - University Lazarus</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/University.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom box-shadow mb-3">
+            <div class="container">
+                <!-- Logo and Title -->
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo.jpg" alt="Lazarus University Logo" style="height: 50px; width: 50px; border-radius: 90%; margin-right: 10px;" />
+                    <span style="font-size: 1.5em; font-weight: bold; color: black;">Lazarus University</span>
+                </a>
+
+
+                <!-- Menu items (Dropdown) -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Course" asp-action="Index">Courses</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="MakeAppointment">Make an Appointment</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="OpeningHours">Opening Hours & Address</a></li>
+                          @*   <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Sport">Sport</a></li> *@
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a></li>
+
+
+                        </ul>
+                    </li>
+                    <!-- Login/Logout Menu with User Name -->
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        var user = UserManager.GetUserAsync(User).Result;
+                        if (user != null)
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link text-dark">Hello @user.FirstName!</span>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="form-inline">
+                                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                    }
+                    
+                    @{
+                        var showBodyContent = ViewData["ShowBodyContent"] as bool? ?? true;
+                    }
+                  
+
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- Optional Hero Section (only for homepage) -->
+    @RenderSection("CustomHero", required: false)
+
+    <!-- Main Content -->
+    <main role="main" class="container" style="display:@(showBodyContent ? "block" : "none")">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-top footer text-muted mt-auto py-3">
+        <div class="container">
+            &copy; 2025 - Lazarus University - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="privacy-link">Privacy</a>
+
+        </div>
+        @RenderSection("Scripts", required: false)
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

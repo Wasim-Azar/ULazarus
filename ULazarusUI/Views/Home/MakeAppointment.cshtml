@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Make an Appointment";
+}
+
+@section CustomHero {
+    <div class="p-5 text-white bg-danger text-center">
+        <h1>Make an Appointment</h1>
+        <p>Schedule a meeting with one of our staff or departments.</p>
+    </div>
+}
+
+<div class="mt-4">
+    <h2>Appointment Form</h2>
+    <form>
+        <div class="form-group mb-2">
+            <label for="fullName">Full Name</label>
+            <input class="form-control" id="fullName" required placeholder="Your full name" />
+        </div>
+        <div class="form-group mb-2">
+            <label for="email">Email</label>
+            <input class="form-control" id="email" type="email" required placeholder="email@domain.com" />
+        </div>
+        <div class="form-group mb-2">
+            <label for="department">Department</label>
+            <select class="form-select" id="department">
+                <option>Admissions</option>
+                <option>Student Services</option>
+                <option>Academic Advising</option>
+                <option>IT Support</option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label for="date">Preferred Date</label>
+            <input type="date" class="form-control" id="date" />
+        </div>
+        <button type="submit" class="btn btn-danger">Submit Appointment</button>
+    </form>
+</div>
