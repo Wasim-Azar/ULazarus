@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Access Denied";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background: url('/images/AccessDeniedBackground.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>
+
+<h2 class="text-white">Access Denied</h2>
+<p class="text-white">You do not have permission to access this page.</p>
+<a asp-action="Index" asp-controller="Home" class="btn btn-primary">Return to Homepage</a>

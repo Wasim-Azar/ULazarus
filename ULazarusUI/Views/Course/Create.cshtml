@@ -1,0 +1,58 @@
+﻿@model ULazarusData.Models.Course
+
+@{
+    ViewData["Title"] = "Create Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Set a background image for the Create page -->
+<style>
+    body {
+        background: url('/images/CreateCourseBackground.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>
+
+<h1 class="text-white">Create New Course</h1>
+
+<!-- Form to create a new Course -->
+<form asp-action="Create" method="post">
+
+    <!-- Input field for Course Name -->
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown to select Faculty -->
+    <div class="form-group">
+        <label asp-for="Faculty"></label>
+        <select asp-for="Faculty" asp-items="ViewBag.Faculties" class="form-control"></select>
+        <span asp-validation-for="Faculty" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown to select Sector -->
+    <div class="form-group">
+        <label asp-for="Sector"></label>
+        <select asp-for="Sector" asp-items="ViewBag.Sectors" class="form-control"></select>
+        <span asp-validation-for="Sector" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown to select Teacher -->
+    <div class="form-group">
+        <label asp-for="Teacher"></label>
+        <select asp-for="Teacher" asp-items="ViewBag.Teachers" class="form-control"></select>
+        <span asp-validation-for="Teacher" class="text-danger"></span>
+    </div>
+
+    <!-- Submit and Cancel buttons -->
+    <button type="submit" class="btn btn-success mt-3">Create Course</button>
+    <a asp-action="Index" class="btn btn-primary mt-3">Back to Course List</a>
+</form>
+
+<!-- Include client-side validation scripts -->
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

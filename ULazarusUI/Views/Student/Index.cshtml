@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ULazarusData.Models.Student>
+@{
+    ViewData["Title"] = "Students";
+}
+
+<h2>Students</h2>
+
+@if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Add New Student</a>
+    </p>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Faculty</th>
+            <th>Schedule Location</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.FirstName @student.LastName</td>
+                <td>@student.Email</td>
+                <td>@student.Faculty?.Name ?? "N/A"</td>
+                <td>@student.Schedule?.Location ?? "N/A"</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@student.StudentId">Details</a>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+                    {
+                     < a asp - action = "Edit" asp - route - id = "@student.StudentId" > Edit </ a >
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                     < a asp - action = "Delete" asp - route - id = "@student.StudentId" > Delete </ a >
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

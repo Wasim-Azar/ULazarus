@@ -1,0 +1,52 @@
+﻿@model ULazarusData.ViewModel.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background: url('/images/LoginBackground.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>
+
+<h2 class="text-white">Login</h2>
+
+<div class="card text-white bg-dark p-4">
+    <form asp-action="Login" method="post">
+        <div class="form-group">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-2">
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" type="password" class="form-control" id="passwordInput" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="form-check mt-2">
+                <input type="checkbox" class="form-check-input" id="showPasswordCheckbox" />
+                <label class="form-check-label" for="showPasswordCheckbox">Show Password</label>
+            </div>
+        </div>
+
+        <div class="form-check mt-3">
+            <input asp-for="RememberMe" class="form-check-input" />
+            <label asp-for="RememberMe" class="form-check-label"></label>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Login</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById('showPasswordCheckbox').addEventListener('change', function () {
+            var passwordInput = document.getElementById('passwordInput');
+            passwordInput.type = this.checked ? 'text' : 'password';
+        });
+    </script>
+}

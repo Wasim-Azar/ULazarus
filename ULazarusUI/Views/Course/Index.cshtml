@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ULazarusData.Models.Course>
+
+@{
+    ViewData["Title"] = "Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background: url('/images/Courses.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+    }
+
+    .course-container {
+        background-color: rgba(250,250,250,0.70); /* Semi-transparent dark background */
+        padding: 30px;
+        border-radius: 15px;
+        margin-top: 30px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .title {
+        color: deepskyblue;
+        text-shadow: 1px 1px 4px #000;
+        
+    }
+
+    .custom-table th {
+        background-color: rgba(0, 51, 102, 0.75); /* Deep blue for header */
+        color: white;
+    }
+
+    .custom-table tbody tr:nth-child(odd) td {
+        background-color: rgba(70, 130, 180, 0.8); /* SteelBlue */
+    }
+
+    .custom-table tbody tr:nth-child(even) td {
+        background-color: rgba(144, 238, 144, 0.8); /* LightGreen */
+    }
+
+    .custom-table td, .custom-table th {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+
+    .btn {
+        margin-right: 5px;
+    }
+</style>
+
+<h1 class="title">Course List</h1>
+
+<div class="course-container">
+    <table class="table rounded shadow custom-table">
+
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Faculty</th>
+                <th>Sector</th>
+                <th>Teacher</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <td>@course.Name</td>
+                    <td>@course.Faculty?.Name</td>
+                    <td>@course.Sector?.Name</td>
+                    <td>@course.Teacher?.FirstName @course.Teacher?.LastName</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@course.CourseId" class="btn btn-info btn-sm">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+    {
+        <a asp-action="Create" class="btn btn-success mt-3">Create New Course</a>
+    }
+</div>
