@@ -14,3 +14,8 @@ Focused on clean architecture, maintainability, and real-world usability.
 
 PS about roles:
 Admin role: Email: wasim@ulazarus.be  Password: Admin.Wasim@1 ----   Teacher role: Email: alice.jansen@ulazarus.be   Password: Teacher@Pass1
+
+PS: Please execute the Database Script first to be able to launch the project.
+Make sure you have the correct connection string:
+"DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=ULazarus;Trusted_Connection=True;"
+
