@@ -1,4 +1,5 @@
-# ULazarus
+# UniversityCourseManager
+
 UniversityCourseManager – ASP.NET Core Web Application
 MVC | Entity Framework Core | SQL Server | 
 Role-Based Authorization Developed a full-featured university management web application as a personal project to strengthen my full-stack development skills. Key contributions:
